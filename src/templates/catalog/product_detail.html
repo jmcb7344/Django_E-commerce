@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+<div class="container ">
+    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <ul>
+            <div class="row">
+                <h3 class="card-header">{{ object.title }}</h3>
+                <div class="col-7">
+                    <figure class="figure">
+                        <img src="{{ object.image.url }}" class="figure-img img-fluid rounded" alt="...">
+                    </figure>
+                </div>
+                <div class="col-5">
+                    <div class="card mb-3">
+                        <h3 class="card-header">Precio: {{ object.price }}$</h3>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ object.description }}</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% if object.active == False %}
+                            <li class="list-group-item"> No hay stock disponible </li>
+                            {% else %}
+                            <li class="list-group-item">cantidad Disponible</li>
+                            <li class="list-group-item">Direccion</li>
+                            {% endif %}
+                        </ul>
+                        <div class="card-footer text-muted">
+                            <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ object.title }}</h4>
+                            <div>
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
+                                    <br>    
+                                    <button class="btn btn-primary" type="submit">Ira al carrito</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>
+
+{% endblock content %}
