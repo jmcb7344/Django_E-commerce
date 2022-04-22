@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h2>Contactanos</h2>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="nombre" name='nombre' />
+                    <label for="username">Nombre</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="email" name='email' />
+                    <label for="username">Correo electronico</label>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensaje</label>
+                    <textarea class="form-control" id="message" rows="5" name="message"></textarea>
+
+                    <br>
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-lg btn-primary" type="submit">Enviar</button>
+                    <a class="btn btn-primary" href="{% url 'home' %}" role="button">Volver</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+{% endblock content %}
