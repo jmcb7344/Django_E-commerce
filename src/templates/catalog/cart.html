@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+<div class="site-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="site-blocks-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in order.item.all %}
+                            <tr>
+                                <td class="product-thumbnail"><img src="{{ item.product.image.url }}" alt="..." class="img-fluid" width="200px"></td>
+                                <td>{{ item.product.name }}</td>
+                                <td>{{ item.product.price }}</td>
+                                <td>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-pretend">
+                                            <a href="{% url 'decrease' item.id %}" class="btn btn-outline-primary">
+                                                &minus;
+                                            </a>
+                                        </div>
+                                        <input type="text" class="form-control text-center" value="{{ item.quantity }}">
+                                        <div class="input-group-append">
+                                            <a href="{% url 'increase' item.id %}" class="btn btn-outline-primary">
+                                                &plus;
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ item.get_total }}</td>
+                                <td>Eliminar</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <h1>total {{ order.get_total }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
